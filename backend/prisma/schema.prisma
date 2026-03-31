@@ -1,0 +1,84 @@
+// schema.prisma
+// -------------
+// Definisce la struttura del database.
+// Dopo ogni modifica esegui: npx prisma db push
+// Per vedere i dati nel browser: npx prisma studio
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ── UTENTI ────────────────────────────────────────────────────────────────────
+model Utente {
+  id               Int      @id @default(autoincrement())
+  email            String   @unique @db.VarChar(150)
+  password_hash    String   @db.VarChar(255)
+  nome             String?  @db.VarChar(100)
+  ruolo            String   @default("admin") @db.VarChar(50)
+  attivo           Boolean  @default(true)
+  data_creazione   DateTime @default(now())
+  ultimo_accesso   DateTime?
+
+  @@map("utenti")
+}
+
+// ── PRODOTTI ─────────────────────────────────────────────────────────────────
+model Prodotto {
+  id              Int        @id @default(autoincrement())
+  codice          String?    @unique @db.VarChar(50)
+  nome            String?    @db.VarChar(150)
+  categoria       String     @db.VarChar(100)
+  prezzo_costo    Decimal    @default(0) @db.Decimal(10, 2)
+  prezzo_vendita  Decimal    @default(0) @db.Decimal(10, 2)
+  data_creazione  DateTime   @default(now())
+
+  magazzino   Magazzino?
+  produzione  Produzione[]
+  vendite     Vendita[]
+
+  @@map("prodotti")
+}
+
+// ── MAGAZZINO ─────────────────────────────────────────────────────────────────
+model Magazzino {
+  id           Int      @id @default(autoincrement())
+  prodotto_id  Int      @unique
+  quantita     Int      @default(0)
+  soglia_alert Int      @default(10)
+
+  prodotto Prodotto @relation(fields: [prodotto_id], references: [id])
+
+  @@map("magazzino")
+}
+
+// ── PRODUZIONE ────────────────────────────────────────────────────────────────
+model Produzione {
+  id          Int      @id @default(autoincrement())
+  data        DateTime @default(now())
+  prodotto_id Int
+  quantita    Int
+  note        String?  @db.VarChar(255)
+
+  prodotto Prodotto @relation(fields: [prodotto_id], references: [id])
+
+  @@map("produzione")
+}
+
+// ── VENDITE ───────────────────────────────────────────────────────────────────
+model Vendita {
+  id          Int      @id @default(autoincrement())
+  data        DateTime @default(now())
+  prodotto_id Int
+  quantita    Int
+  canale      String   @default("Diretto") @db.VarChar(100)
+  note        String?  @db.VarChar(255)
+
+  prodotto Prodotto @relation(fields: [prodotto_id], references: [id])
+
+  @@map("vendite")
+}
