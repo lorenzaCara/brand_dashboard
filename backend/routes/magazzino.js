@@ -11,7 +11,7 @@ const prisma   = require("../database");
 const validate = require("../middleware/validate");
 const { sogliaSchema } = require("../validation/schemas");
 
-// ── GET /api/magazzino ───────────────────────────────────────────────────────
+// GET /api/magazzino
 router.get("/", async (req, res) => {
   try {
     const magazzino = await prisma.magazzino.findMany({
@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// ── PUT /api/magazzino/:id/soglia ────────────────────────────────────────────
+// PUT /api/magazzino/:id/soglia
 router.put("/:id/soglia", validate(sogliaSchema), async (req, res) => {
   const prodotto_id = parseInt(req.params.id);
   if (isNaN(prodotto_id)) return res.status(400).json({ error: "ID non valido." });

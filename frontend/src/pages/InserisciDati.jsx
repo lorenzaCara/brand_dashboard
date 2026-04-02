@@ -50,7 +50,7 @@ export default function InserisciDati() {
   }, []);
   useEffect(() => { refreshProdotti(); }, [refreshProdotti]);
 
-  // ── Form prodotto ─────────────────────────────────────────────────────────
+  // Form prodotto
   const [prod, setProd]       = useState({ codice: "", nome: "", categoria: "", prezzo_costo: "", prezzo_vendita: "" });
   const [msgProd, setMsgProd] = useState({ text: "", ok: false });
 
@@ -73,7 +73,7 @@ export default function InserisciDati() {
     }
   }
 
-  // ── Form produzione ───────────────────────────────────────────────────────
+  // Form produzione
   const [lotto, setLotto]       = useState({ prodotto_id: "", quantita: "", data: TODAY, note: "" });
   const [msgLotto, setMsgLotto] = useState({ text: "", ok: false });
 
@@ -94,7 +94,7 @@ export default function InserisciDati() {
     }
   }
 
-  // ── Form vendita ──────────────────────────────────────────────────────────
+  // Form vendita 
   const [vend, setVend]       = useState({ prodotto_id: "", quantita: "", data: TODAY, canale: "", note: "" });
   const [msgVend, setMsgVend] = useState({ text: "", ok: false });
 
@@ -131,7 +131,7 @@ export default function InserisciDati() {
         <p className="text-xs text-muted-foreground mt-1">Aggiungi prodotti, lotti e vendite</p>
       </div>
 
-      {/* ── FORM PRODOTTO ──────────────────────────────────────────────────── */}
+      {/* FORM PRODOTTO */}
       <Card>
         <CardHeader className="pb-4">
           <CardTitle className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
@@ -181,7 +181,7 @@ export default function InserisciDati() {
         </CardContent>
       </Card>
 
-      {/* ── FORM PRODUZIONE ────────────────────────────────────────────────── */}
+      {/* FORM PRODUZIONE */}
       <Card>
         <CardHeader className="pb-4">
           <CardTitle className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
@@ -226,7 +226,7 @@ export default function InserisciDati() {
         </CardContent>
       </Card>
 
-      {/* ── FORM VENDITA ───────────────────────────────────────────────────── */}
+      {/* FORM VENDITA */}
       <Card>
         <CardHeader className="pb-4">
           <CardTitle className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
@@ -279,7 +279,7 @@ export default function InserisciDati() {
         </CardContent>
       </Card>
 
-      {/* ── TABELLA CATALOGO PRODOTTI ──────────────────────────────────────── */}
+      {/* TABELLA CATALOGO PRODOTTI */}
       <Card>
         <CardHeader className="pb-3">
           <CardTitle className="text-xs font-medium uppercase tracking-widest text-muted-foreground">

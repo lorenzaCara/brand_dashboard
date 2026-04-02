@@ -13,7 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ── UTENTI ────────────────────────────────────────────────────────────────────
+// UTENTI 
 model Utente {
   id               Int      @id @default(autoincrement())
   email            String   @unique @db.VarChar(150)
@@ -27,7 +27,7 @@ model Utente {
   @@map("utenti")
 }
 
-// ── PRODOTTI ─────────────────────────────────────────────────────────────────
+// PRODOTTI
 model Prodotto {
   id              Int        @id @default(autoincrement())
   codice          String?    @unique @db.VarChar(50)
@@ -44,7 +44,7 @@ model Prodotto {
   @@map("prodotti")
 }
 
-// ── MAGAZZINO ─────────────────────────────────────────────────────────────────
+// MAGAZZINO
 model Magazzino {
   id           Int      @id @default(autoincrement())
   prodotto_id  Int      @unique
@@ -56,7 +56,7 @@ model Magazzino {
   @@map("magazzino")
 }
 
-// ── PRODUZIONE ────────────────────────────────────────────────────────────────
+// PRODUZIONE
 model Produzione {
   id          Int      @id @default(autoincrement())
   data        DateTime @default(now())
@@ -69,7 +69,7 @@ model Produzione {
   @@map("produzione")
 }
 
-// ── VENDITE ───────────────────────────────────────────────────────────────────
+// VENDITE
 model Vendita {
   id          Int      @id @default(autoincrement())
   data        DateTime @default(now())

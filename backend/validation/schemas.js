@@ -12,7 +12,7 @@
 
 const { z } = require("zod");
 
-// ── AUTH ─────────────────────────────────────────────────────────────────────
+// AUTH
 const loginSchema = z.object({
   email: z
     .string({ required_error: "Email obbligatoria." })
@@ -56,7 +56,7 @@ const cambioPasswordSchema = z
     path: ["nuova_password"],
   });
 
-// ── PRODOTTI ─────────────────────────────────────────────────────────────────
+// PRODOTTI
 const prodottoSchema = z
   .object({
     codice: z
@@ -93,7 +93,7 @@ const prodottoSchema = z
     path: ["prezzo_vendita"],
   });
 
-// ── PRODUZIONE ───────────────────────────────────────────────────────────────
+// PRODUZIONE
 const produzioneSchema = z.object({
   prodotto_id: z
     .number({ required_error: "Seleziona un prodotto.",
@@ -115,15 +115,8 @@ const produzioneSchema = z.object({
     .nullable(),
 });
 
-// ── VENDITE ──────────────────────────────────────────────────────────────────
-const CANALI_VALIDI = [
-  "Diretto",
-  "Instagram",
-  "Sito Web",
-  "Marketplace",
-  "Wholesale",
-  "Altro",
-];
+// VENDITE
+const CANALI_VALIDI = [ "Outerwear", "T-shirt", "Knitwear", "Hoodie", "Bottom", "Headwear", "Eyewear", "Bag", "Accessories" ];
 
 const venditaSchema = z.object({
   prodotto_id: z
@@ -151,7 +144,7 @@ const venditaSchema = z.object({
     .nullable(),
 });
 
-// ── SOGLIA ALERT ─────────────────────────────────────────────────────────────
+// SOGLIA ALERT
 const sogliaSchema = z.object({
   soglia: z
     .number({ required_error: "Soglia obbligatoria.",
@@ -160,7 +153,7 @@ const sogliaSchema = z.object({
     .min(0, "La soglia non può essere negativa."),
 });
 
-// ── HELPER: estrae messaggi di errore leggibili da ZodError ──────────────────
+// HELPER: estrae messaggi di errore leggibili da ZodError ──────────────────
 function formatZodErrors(error) {
   return error.errors.map((e) => ({
     campo:    e.path.join(".") || "generale",

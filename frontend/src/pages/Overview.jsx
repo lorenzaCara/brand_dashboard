@@ -33,7 +33,7 @@ export default function Overview() {
 
   if (loading) return <p className="text-sm text-muted-foreground">Caricamento...</p>;
 
-  // ── Metriche ──────────────────────────────────────────────────────────────
+  // Metriche 
   const totRicavo  = vendite.reduce((s, v) => s + v.ricavo,  0);
   const totMargine = vendite.reduce((s, v) => s + v.margine, 0);
   const nAlert     = magazzino.filter((m) => m.in_alert).length;
@@ -44,7 +44,7 @@ export default function Overview() {
     .filter((v) => new Date(v.data) >= trenta)
     .reduce((s, v) => s + v.ricavo, 0);
 
-  // ── Dati grafico ricavo nel tempo ─────────────────────────────────────────
+  // Dati grafico ricavo nel tempo 
   const ricavoPerGiorno = Object.values(
     vendite.reduce((acc, v) => {
       acc[v.data] = acc[v.data] || { data: v.data, ricavo: 0 };
@@ -53,7 +53,7 @@ export default function Overview() {
     }, {})
   ).sort((a, b) => a.data.localeCompare(b.data));
 
-  // ── Dati grafico produzione vs vendite ────────────────────────────────────
+  // Dati grafico produzione vs vendite
   const prodPerNome = produzione.reduce((acc, p) => {
     const k = p.nome || p.codice;
     acc[k] = (acc[k] || 0) + p.quantita;

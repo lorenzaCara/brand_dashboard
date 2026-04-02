@@ -13,7 +13,7 @@ const prisma   = require("../database");
 const validate = require("../middleware/validate");
 const { prodottoSchema } = require("../validation/schemas");
 
-// ── GET /api/prodotti ────────────────────────────────────────────────────────
+// GET /api/prodotti
 router.get("/", async (req, res) => {
   try {
     const prodotti = await prisma.prodotto.findMany({
@@ -25,7 +25,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// ── POST /api/prodotti ───────────────────────────────────────────────────────
+// POST /api/prodotti
 router.post("/", validate(prodottoSchema), async (req, res) => {
   const { codice, nome, categoria, prezzo_costo, prezzo_vendita } = req.body;
   try {
@@ -54,7 +54,7 @@ router.post("/", validate(prodottoSchema), async (req, res) => {
   }
 });
 
-// ── PUT /api/prodotti/:id ────────────────────────────────────────────────────
+// PUT /api/prodotti/:id
 router.put("/:id", validate(prodottoSchema), async (req, res) => {
   const id = parseInt(req.params.id);
   if (isNaN(id)) return res.status(400).json({ error: "ID non valido." });
@@ -81,7 +81,7 @@ router.put("/:id", validate(prodottoSchema), async (req, res) => {
   }
 });
 
-// ── DELETE /api/prodotti/:id ─────────────────────────────────────────────────
+// DELETE /api/prodotti/:id
 router.delete("/:id", async (req, res) => {
   const id = parseInt(req.params.id);
   if (isNaN(id)) return res.status(400).json({ error: "ID non valido." });

@@ -13,7 +13,7 @@ const prisma   = require("../database");
 const validate = require("../middleware/validate");
 const { produzioneSchema } = require("../validation/schemas");
 
-// ── GET /api/produzione ──────────────────────────────────────────────────────
+// GET /api/produzione
 router.get("/", async (req, res) => {
   try {
     const lotti = await prisma.produzione.findMany({
@@ -42,7 +42,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// ── POST /api/produzione ─────────────────────────────────────────────────────
+// POST /api/produzione
 router.post("/", validate(produzioneSchema), async (req, res) => {
   const { prodotto_id, quantita, data, note } = req.body;
   try {
@@ -61,7 +61,7 @@ router.post("/", validate(produzioneSchema), async (req, res) => {
   }
 });
 
-// ── PUT /api/produzione/:id ──────────────────────────────────────────────────
+// PUT /api/produzione/:id
 // Modifica nota e data — NON modifica la quantità per non sballare il magazzino.
 // Per correggere la quantità va eliminato e reinserito.
 router.put("/:id", async (req, res) => {
@@ -82,7 +82,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// ── DELETE /api/produzione/:id ───────────────────────────────────────────────
+// DELETE /api/produzione/:id 
 router.delete("/:id", async (req, res) => {
   const id = parseInt(req.params.id);
   if (isNaN(id)) return res.status(400).json({ error: "ID non valido." });

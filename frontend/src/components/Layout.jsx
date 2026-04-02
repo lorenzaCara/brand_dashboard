@@ -33,7 +33,7 @@ export default function Layout() {
   return (
     <div className="flex h-screen bg-background">
 
-      {/* ── SIDEBAR ─────────────────────────────────────────────────── */}
+      {/* SIDEBAR */}
       <aside className="w-56 border-r flex flex-col bg-background">
 
         <div className="px-6 py-5 border-b">
@@ -91,7 +91,7 @@ export default function Layout() {
         </div>
       </aside>
 
-      {/* ── MAIN CONTENT ────────────────────────────────────────────── */}
+      {/* MAIN CONTENT */}
       <main className="flex-1 overflow-y-auto">
         <div className="max-w-6xl mx-auto px-8 py-8">
           <Outlet />

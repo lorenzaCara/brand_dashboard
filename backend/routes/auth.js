@@ -21,7 +21,7 @@ const {
   cambioPasswordSchema,
 } = require("../validation/schemas");
 
-// ── POST /api/auth/register ──────────────────────────────────────────────────
+// POST /api/auth/register
 router.post("/register", validate(registerSchema), async (req, res) => {
   const { email, password, nome } = req.body;
 
@@ -48,7 +48,7 @@ router.post("/register", validate(registerSchema), async (req, res) => {
   }
 });
 
-// ── POST /api/auth/login ─────────────────────────────────────────────────────
+// POST /api/auth/login
 router.post("/login", validate(loginSchema), async (req, res) => {
   const { email, password } = req.body;
 
@@ -92,7 +92,7 @@ router.post("/login", validate(loginSchema), async (req, res) => {
   }
 });
 
-// ── GET /api/auth/me ─────────────────────────────────────────────────────────
+// GET /api/auth/me
 router.get("/me", auth, async (req, res) => {
   try {
     const utente = await prisma.utente.findUnique({
@@ -106,12 +106,12 @@ router.get("/me", auth, async (req, res) => {
   }
 });
 
-// ── POST /api/auth/logout ────────────────────────────────────────────────────
+// POST /api/auth/logout
 router.post("/logout", auth, (req, res) => {
   res.json({ message: "Logout effettuato." });
 });
 
-// ── PUT /api/auth/cambio-password ────────────────────────────────────────────
+// PUT /api/auth/cambio-password
 router.put("/cambio-password", auth, validate(cambioPasswordSchema), async (req, res) => {
   const { password_attuale, nuova_password } = req.body;
 

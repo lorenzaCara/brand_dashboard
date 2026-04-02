@@ -25,11 +25,11 @@ export default function App() {
       <AuthProvider>
         <Routes>
 
-          {/* ── Pagine pubbliche ────────────────────────────────────── */}
+          {/* Pagine pubbliche */}
           <Route path="/login"    element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* ── Pagine protette ─────────────────────────────────────── */}
+          {/* Pagine protette */}
           <Route
             element={
               <ProtectedRoute>
@@ -45,7 +45,7 @@ export default function App() {
             <Route path="cambio-password" element={<CambioPassword />} />
           </Route>
 
-          {/* ── Fallback ─────────────────────────────────────────────── */}
+          {/* Fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />
 
         </Routes>

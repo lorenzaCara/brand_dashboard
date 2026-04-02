@@ -14,7 +14,7 @@ const client = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-// ── Interceptor REQUEST ───────────────────────────────────────────────────────
+// Interceptor REQUEST
 // Prima di ogni richiesta, aggiunge il token JWT nell'header Authorization
 client.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
@@ -24,7 +24,7 @@ client.interceptors.request.use((config) => {
   return config;
 });
 
-// ── Interceptor RESPONSE ──────────────────────────────────────────────────────
+// Interceptor RESPONSE
 // Se il backend risponde con 401 (token scaduto o mancante),
 // cancella il token e reindirizza al login
 client.interceptors.response.use(
@@ -39,7 +39,7 @@ client.interceptors.response.use(
   }
 );
 
-// ── Funzioni API ──────────────────────────────────────────────────────────────
+// Funzioni API
 
 export const authAPI = {
   login:           (data) => client.post("/auth/login", data),
